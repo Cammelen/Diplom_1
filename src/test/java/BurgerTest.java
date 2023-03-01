@@ -15,6 +15,11 @@ import static org.junit.Assert.*;
 
 public class BurgerTest {
 
+    @Before
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
 
     @Test // DONE
     public void checkSetBuns() {
@@ -28,20 +33,39 @@ public class BurgerTest {
     @Test // DONE
     public void checkAddIngredients() {
 
-        Ingredient ingredientSauce = new Ingredient(IngredientType.SAUCE, "hot sauce", 100);
+        Ingredient ingredient = new Ingredient(IngredientType.SAUCE, "hot sauce", 100);
+        List<Ingredient> ingredientList = new ArrayList<>();
+        ingredientList.add(ingredient);
         Burger burger = new Burger();
-        burger.ingredients.add(ingredientSauce);
-        System.out.println(ingredientSauce.getName());
-        assertNotNull(ingredientSauce);
-        assertEquals("hot sauce", ingredientSauce.getName());
+        burger.addIngredient(ingredient);
+        System.out.println(burger.ingredients);
+        System.out.println(ingredientList);
+        assertEquals(ingredientList, burger.ingredients);
     }
 
-    @Test
-    public void removeIngredient() {
+    @Test // DONE
+    public void checkRemoveIngredient() {
+
+        Ingredient ingredient = new Ingredient(IngredientType.SAUCE, "hot sauce", 100);
+        List<Ingredient> ingredientList = new ArrayList<>();
+        ingredientList.add(ingredient);
+        Burger burger = new Burger();
+        burger.addIngredient(ingredient);
+        System.out.println(ingredientList);
+        System.out.println(burger.ingredients);
+        ingredientList.remove(0);
+        burger.removeIngredient(0);
+        System.out.println(ingredientList);
+        System.out.println(burger.ingredients);
+        assertEquals(ingredientList, burger.ingredients);
     }
 
     @Test
     public void moveIngredient() {
+    }
+
+    @Test
+    public void getPrice() {
     }
 
 
