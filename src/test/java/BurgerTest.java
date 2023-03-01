@@ -55,13 +55,29 @@ public class BurgerTest {
         System.out.println(burger.ingredients);
         ingredientList.remove(0);
         burger.removeIngredient(0);
+        assertEquals(ingredientList, burger.ingredients);
         System.out.println(ingredientList);
         System.out.println(burger.ingredients);
-        assertEquals(ingredientList, burger.ingredients);
     }
 
     @Test
     public void moveIngredient() {
+
+        Ingredient ingredientSauce = new Ingredient(IngredientType.SAUCE, "hot sauce", 100);
+        Ingredient ingredienteeFilling = new Ingredient(IngredientType.FILLING, "cutlet", 100);
+        List<Ingredient> ingredientList = new ArrayList<>();
+        ingredientList.add(ingredientSauce);
+        ingredientList.add(ingredienteeFilling);
+        System.out.println(ingredientList);
+        ingredientList.add(1, ingredientList.remove(0));
+        Burger burger = new Burger();
+        burger.addIngredient(ingredientSauce);
+        burger.addIngredient(ingredienteeFilling);
+        System.out.println(burger.ingredients);
+        burger.moveIngredient(1, 0);
+        assertEquals(ingredientList, burger.ingredients);
+        System.out.println(ingredientList);
+        System.out.println(burger.ingredients);
     }
 
     @Test
