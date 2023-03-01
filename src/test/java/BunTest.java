@@ -1,6 +1,7 @@
-import org.junit.Assert;
 import org.junit.Test;
 import praktikum.Bun;
+
+import static org.junit.Assert.assertEquals;
 
 public class BunTest {
 
@@ -10,14 +11,13 @@ public class BunTest {
     public void getNameBun() {
         String expectedName = "black bun";
         String actualName = bun.getName();
-        Assert.assertEquals(expectedName, actualName);
+        assertEquals(expectedName, actualName);
     }
 
     @Test
     public void getPriceBun() {
         float expectedPrice = 100;
         float actualPrice = bun.getPrice();
-        Assert.assertEquals(expectedPrice, actualPrice, 0);
+        assertEquals(expectedPrice, actualPrice, 0);
     }
-
 }
