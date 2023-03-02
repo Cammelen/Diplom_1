@@ -1,37 +1,65 @@
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import praktikum.Ingredient;
 import praktikum.IngredientType;
-
 import static org.junit.Assert.assertEquals;
 
+@RunWith(Parameterized.class)
 public class IngredientTest {
 
-    private final Ingredient ingredient = new Ingredient(IngredientType.SAUCE, "red bun", 300);
+    IngredientType ingredientType;
+    private final String name;
+    private final float price;
+
+    public IngredientTest(IngredientType ingredientType, String name, float price) {
+        this.ingredientType = ingredientType;
+        this.name = name;
+        this.price = price;
+    }
+
+    @Parameterized.Parameters
+    public static Object[][] ingredient() {
+        return new Object[][]{
+                {IngredientType.SAUCE, "hot sauce", 100},
+                {IngredientType.SAUCE, "sour cream", 200},
+                {IngredientType.SAUCE, "chili sauce", 300},
+                {IngredientType.FILLING, "cutlet", 100},
+                {IngredientType.FILLING, "dinosaur", 200},
+                {IngredientType.FILLING, "sausage", 300}
+        };
+    }
 
     @Test
+    @DisplayName("Проверка цены ингредиента")
     public void getPriceIngredient() {
 
-        float expectedPrice = 300;
+        Ingredient ingredient = new Ingredient(ingredientType, name, price);
         float actualPrice = ingredient.getPrice();
 
-        assertEquals(expectedPrice, actualPrice, 0);
+        assertEquals(price, actualPrice, 0);
     }
 
     @Test
+    @DisplayName("Проверка названия ингредиента")
     public void getNameIngredient() {
 
-        String expectedName = "red bun";
+        Ingredient ingredient = new Ingredient(ingredientType, name, price);
         String actualName = ingredient.getName();
 
-        assertEquals(expectedName, actualName);
+        assertEquals(name, actualName);
     }
 
     @Test
+    @DisplayName("Проверка типа ингредиента")
     public void getTypeIngredient() {
 
-        IngredientType e = IngredientType.SAUCE;
-        IngredientType a = ingredient.getType();
+        Ingredient ingredient = new Ingredient(ingredientType, name, price);
+        IngredientType actualType = ingredient.getType();
 
-        assertEquals(e, a);
+        assertEquals(ingredientType, actualType);
     }
+
+
 }
