@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -26,6 +27,7 @@ public class BunTest {
     }
 
     @Test
+    @DisplayName("проверка названия булочки")
     public void getNameBun() {
 
         Bun bun = new Bun(name, price);
@@ -34,6 +36,7 @@ public class BunTest {
     }
 
     @Test
+    @DisplayName("проверка цены булочки")
     public void getPriceBun() {
         Bun bun = new Bun(name, price);
         float actualPrice = bun.getPrice();

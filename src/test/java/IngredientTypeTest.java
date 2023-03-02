@@ -1,16 +1,16 @@
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import praktikum.IngredientType;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotEquals;
 
 public class IngredientTypeTest {
 
     @Test
+    @DisplayName ("Проверка названий типов ингридиентов")
     public void getNameIngredientType() {
 
-        String expectedName = "SAUCE";
-        String actualName = IngredientType.SAUCE.name();
-        assertEquals(expectedName, actualName);
+        assertEquals("SAUCE", IngredientType.SAUCE.name());
+        assertNotEquals("SAUCE", IngredientType.FILLING.name());
     }
 }
