@@ -1,21 +1,17 @@
 import io.qameta.allure.junit4.DisplayName;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import praktikum.Bun;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class BunTest {
+public class BunTest extends TestBase {
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+    @Mock
+    Bun bun;
 
     private final String name;
     private final float price;
@@ -35,27 +31,29 @@ public class BunTest {
     }
 
     @Test
-    @DisplayName ("Проверка названия булочки")
+    @DisplayName("Проверка названия булочки")
     public void getNameBun() {
 
         Bun bun = new Bun(name, price);
+
         String actualName = bun.getName();
+
         assertEquals(name, actualName);
     }
 
     @Test
-    @DisplayName ("Проверка цены булочки")
+    @DisplayName("Проверка цены булочки")
     public void getPriceBun() {
+
         Bun bun = new Bun(name, price);
+
         float actualPrice = bun.getPrice();
+
         assertEquals(price, actualPrice, 0);
     }
 
-    @Mock
-    Bun bun;
-
     @Test
-    @DisplayName ("Проверка количества вызовов метода получения имени булочки")
+    @DisplayName("Проверка количества вызовов метода получения имени булочки")
     public void getNameBunMock() {
 
         bun.getName();
@@ -64,7 +62,7 @@ public class BunTest {
     }
 
     @Test
-    @DisplayName ("Проверка количества вызовов метода получения цены булочки")
+    @DisplayName("Проверка количества вызовов метода получения цены булочки")
     public void getPriceBunMock() {
 
         bun.getPrice();
@@ -72,5 +70,4 @@ public class BunTest {
         bun.getPrice();
         Mockito.verify(bun, Mockito.times(3)).getPrice();
     }
-
 }

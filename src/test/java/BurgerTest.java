@@ -1,100 +1,96 @@
-import org.hamcrest.MatcherAssert;
-import org.junit.After;
-import org.junit.Before;
+import praktikum.*;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.exceptions.misusing.MockitoConfigurationException;
-import praktikum.*;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
-
 import static org.junit.Assert.*;
 
-public class BurgerTest {
+public class BurgerTest extends TestBase {
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+    @Mock
+    Bun bun;
 
+    Ingredient ingredientSauce = new Ingredient(IngredientType.SAUCE, "hot sauce", 100);
+    Ingredient ingredientFilling = new Ingredient(IngredientType.FILLING, "cutlet", 100);
+    List<Ingredient> ingredientList = new ArrayList<>();
 
     @Test
+    @DisplayName("Проверка на создание булочки")
     public void checkSetBuns() {
 
-        Bun bun = new Bun("red bun", 300);
         Burger burger = new Burger();
+
+        Mockito.when(bun.getName()).thenReturn("red bun");
+        Mockito.when(bun.getPrice()).thenReturn(300F);
+
         burger.setBuns(bun);
+
         assertEquals(bun, burger.bun);
     }
 
     @Test
+    @DisplayName("Проверка на добавление ингредиентов бургера")
     public void checkAddIngredients() {
 
-        Ingredient ingredient = new Ingredient(IngredientType.SAUCE, "hot sauce", 100);
-        List<Ingredient> ingredientList = new ArrayList<>();
-        ingredientList.add(ingredient);
         Burger burger = new Burger();
-        burger.addIngredient(ingredient);
-        System.out.println(burger.ingredients);
-        System.out.println(ingredientList);
+
+        ingredientList.add(ingredientSauce);
+        ingredientList.add(ingredientFilling);
+
+        burger.addIngredient(ingredientSauce);
+        burger.addIngredient(ingredientFilling);
+
         assertEquals(ingredientList, burger.ingredients);
     }
 
     @Test
+    @DisplayName("Проверка на удаление ингредиента бургера")
     public void checkRemoveIngredient() {
 
-        Ingredient ingredient = new Ingredient(IngredientType.SAUCE, "hot sauce", 100);
-        List<Ingredient> ingredientList = new ArrayList<>();
-        ingredientList.add(ingredient);
         Burger burger = new Burger();
-        burger.addIngredient(ingredient);
-        System.out.println(ingredientList);
+
+        ingredientList.add(ingredientSauce);
+        burger.addIngredient(ingredientSauce);
         System.out.println(burger.ingredients);
+
         ingredientList.remove(0);
         burger.removeIngredient(0);
+
         assertEquals(ingredientList, burger.ingredients);
-        System.out.println(ingredientList);
         System.out.println(burger.ingredients);
     }
 
     @Test
+    @DisplayName("Проверка на перемещение ингредиентов бургера")
     public void moveIngredient() {
 
-        Ingredient ingredientSauce = new Ingredient(IngredientType.SAUCE, "hot sauce", 100);
-        Ingredient ingredienteeFilling = new Ingredient(IngredientType.FILLING, "cutlet", 100);
-        List<Ingredient> ingredientList = new ArrayList<>();
-        ingredientList.add(ingredientSauce);
-        ingredientList.add(ingredienteeFilling);
-        System.out.println(ingredientList);
-        ingredientList.add(1, ingredientList.remove(0));
         Burger burger = new Burger();
+
+        ingredientList.add(ingredientSauce);
+        ingredientList.add(ingredientFilling);
+        ingredientList.add(1, ingredientList.remove(0));
+
         burger.addIngredient(ingredientSauce);
-        burger.addIngredient(ingredienteeFilling);
-        System.out.println(burger.ingredients);
+        burger.addIngredient(ingredientFilling);
         burger.moveIngredient(1, 0);
+
         assertEquals(ingredientList, burger.ingredients);
-        System.out.println(ingredientList);
-        System.out.println(burger.ingredients);
     }
 
     @Test
+    @DisplayName("Проверка на получение стоимости бургера")
     public void checkGetPrice() {
 
         Burger burger = new Burger();
 
-        Bun bun = new Bun("black bun", 100);
+        Mockito.when(bun.getPrice()).thenReturn(100F);
+
         float price = bun.getPrice() * 2;
 
-        Ingredient ingredientSauce = new Ingredient(IngredientType.SAUCE, "hot sauce", 100);
-        Ingredient ingredienteeFilling = new Ingredient(IngredientType.FILLING, "cutlet", 100);
-        List<Ingredient> ingredientList = new ArrayList<>();
         ingredientList.add(ingredientSauce);
-        ingredientList.add(ingredienteeFilling);
+        ingredientList.add(ingredientFilling);
 
         for (
                 Ingredient ingredient : ingredientList) {
@@ -103,7 +99,7 @@ public class BurgerTest {
 
         burger.setBuns(bun);
         burger.addIngredient(ingredientSauce);
-        burger.addIngredient(ingredienteeFilling);
+        burger.addIngredient(ingredientFilling);
 
         float actualPrice = burger.getPrice();
 
@@ -113,33 +109,33 @@ public class BurgerTest {
     }
 
     @Test
-    public void getReceipt() {
+    @DisplayName("Проверка на получение рецепта бургера")
+    public void checkGetReceipt() {
 
         Burger burger = new Burger();
-        Bun bun = new Bun("black bun", 100);
+
+        Mockito.when(bun.getName()).thenReturn("black bun");
 
         StringBuilder receipt = new StringBuilder(String.format("(==== %s ====)%n", bun.getName()));
 
-        Ingredient ingredientSauce = new Ingredient(IngredientType.SAUCE, "hot sauce", 100);
-        Ingredient ingredienteeFilling = new Ingredient(IngredientType.FILLING, "cutlet", 100);
-        List<Ingredient> ingredientList = new ArrayList<>();
         ingredientList.add(ingredientSauce);
-        ingredientList.add(ingredienteeFilling);
+        ingredientList.add(ingredientFilling);
 
-        for (Ingredient ingredient: ingredientList) {
+        for (Ingredient ingredient : ingredientList) {
             receipt.append(String.format("= %s %s =%n", ingredient.getType().toString().toLowerCase(), ingredient.getName()));
         }
 
         burger.setBuns(bun);
         burger.addIngredient(ingredientSauce);
-        burger.addIngredient(ingredienteeFilling);
+        burger.addIngredient(ingredientFilling);
 
         receipt.append(String.format("(==== %s ====)%n", bun.getName()));
         receipt.append(String.format("%nPrice: %f%n", burger.getPrice()));
 
-      StringBuilder actualReceipt = new StringBuilder(burger.getReceipt());
+        StringBuilder actualReceipt = new StringBuilder(burger.getReceipt());
 
         assertNotNull(actualReceipt);
+        System.out.println(receipt);
         System.out.println(actualReceipt);
     }
 }

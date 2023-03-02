@@ -4,10 +4,10 @@ import praktikum.IngredientType;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-public class IngredientTypeTest {
+public class IngredientTypeTest extends TestBase {
 
     @Test
-    @DisplayName ("Проверка названий типов ингридиентов")
+    @DisplayName("Проверка названий типов ингридиентов")
     public void getNameIngredientType() {
 
         assertEquals("SAUCE", IngredientType.SAUCE.name());

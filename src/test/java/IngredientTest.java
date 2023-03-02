@@ -7,7 +7,7 @@ import praktikum.IngredientType;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class IngredientTest {
+public class IngredientTest extends TestBase {
 
     IngredientType ingredientType;
     private final String name;
@@ -23,10 +23,8 @@ public class IngredientTest {
     public static Object[][] ingredient() {
         return new Object[][]{
                 {IngredientType.SAUCE, "hot sauce", 100},
-                {IngredientType.SAUCE, "sour cream", 200},
                 {IngredientType.SAUCE, "chili sauce", 300},
                 {IngredientType.FILLING, "cutlet", 100},
-                {IngredientType.FILLING, "dinosaur", 200},
                 {IngredientType.FILLING, "sausage", 300}
         };
     }
@@ -36,6 +34,7 @@ public class IngredientTest {
     public void getPriceIngredient() {
 
         Ingredient ingredient = new Ingredient(ingredientType, name, price);
+
         float actualPrice = ingredient.getPrice();
 
         assertEquals(price, actualPrice, 0);
@@ -46,6 +45,7 @@ public class IngredientTest {
     public void getNameIngredient() {
 
         Ingredient ingredient = new Ingredient(ingredientType, name, price);
+
         String actualName = ingredient.getName();
 
         assertEquals(name, actualName);
@@ -56,10 +56,9 @@ public class IngredientTest {
     public void getTypeIngredient() {
 
         Ingredient ingredient = new Ingredient(ingredientType, name, price);
+
         IngredientType actualType = ingredient.getType();
 
         assertEquals(ingredientType, actualType);
     }
-
-
 }
