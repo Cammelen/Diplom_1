@@ -7,7 +7,7 @@ import praktikum.IngredientType;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class IngredientTest extends TestBase {
+public class IngredientTest extends BaseTest {
 
     IngredientType ingredientType;
     private final String name;
@@ -19,7 +19,7 @@ public class IngredientTest extends TestBase {
         this.price = price;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тип, название, стоимость ингредиента. Тестовые данные: {0} {1} {2} {3}")
     public static Object[][] ingredient() {
         return new Object[][]{
                 {IngredientType.SAUCE, "hot sauce", 100},

@@ -4,7 +4,7 @@ import praktikum.IngredientType;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-public class IngredientTypeTest extends TestBase {
+public class IngredientTypeTest extends BaseTest {
 
     @Test
     @DisplayName("Проверка названий типов ингридиентов")

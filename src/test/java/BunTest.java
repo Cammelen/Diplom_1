@@ -8,7 +8,7 @@ import praktikum.Bun;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class BunTest extends TestBase {
+public class BunTest extends BaseTest {
 
     @Mock
     Bun bun;
@@ -21,7 +21,7 @@ public class BunTest extends TestBase {
         this.price = price;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Стоимость булочки. Тестовые данные: {0} {1} {2}")
     public static Object[][] bun() {
         return new Object[][]{
                 {"black bun", 100},
@@ -58,6 +58,7 @@ public class BunTest extends TestBase {
 
         bun.getName();
         bun.getName();
+
         Mockito.verify(bun, Mockito.times(2)).getName();
     }
 
@@ -68,6 +69,7 @@ public class BunTest extends TestBase {
         bun.getPrice();
         bun.getPrice();
         bun.getPrice();
+
         Mockito.verify(bun, Mockito.times(3)).getPrice();
     }
 }

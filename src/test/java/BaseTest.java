@@ -2,8 +2,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.mockito.MockitoAnnotations;
 
-public class TestBase {
-
+public class BaseTest {
 
     @Before
     public void setUp() {
@@ -13,5 +12,4 @@ public class TestBase {
     @After
     public void cleanUp() {
     }
-
 }
